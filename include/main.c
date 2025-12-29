@@ -3,11 +3,8 @@
 #include <stdlib.h>
 #include "main.h"
 /*
-
-	<A=5;B=5>(A+B;)
-	
+	<A=5;B=5>(A+B;)	
 */
-
 
 void s_Tokenizer(char *code, struct Block *b) {
     int i = 0, v_i = 0, flag = 0;
