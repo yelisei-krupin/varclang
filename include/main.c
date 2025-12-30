@@ -121,6 +121,13 @@ void b_logic(char *code1) {
         }
 }
 
+void b_p_logic(char *code) {
+    int i, v_i =0;
+    while(code[i]!='\0') {
+        i++;
+    }   
+}
+
 int main() {
     char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;>(;AOZGAR+BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
     struct Block* block1;
