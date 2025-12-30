@@ -122,14 +122,65 @@ void b_logic(char *code1) {
 }
 
 void b_p_logic(char *code) {
-    int i, v_i =0;
-    while(code[i]!='\0') {
+    int i = 0, v_i =0,v_i2=0, flag=0, temp = 0;
+    struct Token_v2 token;
+    char vpart[100];
+    char vpart2[100];
+    int leng = strlen(code);
+        while(code[i]!='\0') {
+
+        if(code[i-1] == '+' || code[i-1] == '/' || code[i-1] == '*' || code[i-1] == '-'){temp = 1;}
+        if(temp ==1) {
+            vpart2[v_i2]=code[i];
+            v_i2++;
+        }
+
+        /* AOZGAR*BOZGAR */
+        
+        if(code[i] == '+' || code[i] == '/' || code[i] == '*' || code[i] == '-') {
+            switch(code[i]) {
+                case '+':
+                    token.method = 0;
+                    break;
+                case '-':
+                    token.method = 1;
+                    break;
+                case '*':
+                    token.method = 2;
+                    break;
+                case '/':
+                    token.method = 3;
+                    break;
+                default:
+                    token.method=4;
+                    break;
+            }
+            flag=1;
+        }
+        if(flag==0) {
+             vpart[v_i] = code[i];
+             v_i++;
+        }
         i++;
     }   
+
+    if(flag == 1) {
+        vpart[v_i] = '\0';
+        strcpy(token.key1, vpart);
+        v_i = 0;
+        vpart[0] = '\0';
+    }
+    
+    vpart2[v_i2]= '\0';
+    strcpy(token.key2, vpart2); 
+    v_i2 = 0;
+    vpart2[v_i2] = '\0';
+    tokens_ls[tokens_lsi] = token;
+    tokens_lsi++;
 }
 
 int main() {
-    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;>(;AOZGAR+BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
+    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
     struct Block* block1;
     struct Block* block2;
     struct Part* p=malloc(sizeof(*p));
@@ -142,10 +193,9 @@ int main() {
 	t_p_b_Tokenizer(parts[3].value);
 	t_p_b_Tokenizer(parts[4].value);
 	b_logic(block2->value);
-	for(int i = 0; i < 3;i++) {
-	    printf("=%s=\n", parts_ls[i].value);
-	}
+	b_p_logic(parts_ls[0].value);
+	b_p_logic(parts_ls[1].value);
+	// printf("%s", );
+	// printf("%s", parts_ls[0].value);
+	printf("%s %d %s", tokens_ls[1].key1, tokens_ls[1].method, tokens_ls[1].key2);
 }
-
-
-// if(code[i] == '-' || code[i] == '+'|| code[i] == '/' || code[i] == '*') {flag = 0;}
