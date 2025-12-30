@@ -134,7 +134,6 @@ int main() {
 	t_p_b_Tokenizer(parts[2].value);
 	t_p_b_Tokenizer(parts[3].value);
 	t_p_b_Tokenizer(parts[4].value);
-
 	b_logic(block2->value);
 	for(int i = 0; i < 3;i++) {
 	    printf("=%s=\n", parts_ls[i].value);
