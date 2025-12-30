@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #define FILL_OUT malloc(100 * sizeof(int));
 
-struct Vars {char key[100];int val;};
 struct Block {char value[100];};
 struct Part {char value[50];};
-void s_Tokenizer(char *code, struct Block *b);
+struct Token {char key;int value;};
+void v_Tokenizer(char *code, struct Block *b);
+void l_Tokenizer(char *code, struct Block *b);
+void v_b_Tokenizer(char *code, struct Token *token);
 // extern struct Block block1;
 #endif

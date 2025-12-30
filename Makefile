@@ -12,7 +12,6 @@ $(TARGET): $(SRC)
 	@mkdir -p build
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
 
-# Tozalash qoidasi
 clean:
 	rm -rf build
 
