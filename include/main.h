@@ -5,14 +5,22 @@
 #define FILL_OUT malloc(100 * sizeof(int));
 
 
-int part_i = 0;
+int part_i = 0;int token_i = 0;
+/*
+        0 = +
+        1 = -
+        2 = *
+        3 = /
+*/
 
 struct Block {char value[100];};
 struct Part {char value[50];};
-struct Token {char key;int value;};
+struct Token_v1 {char key;int value;};
 struct Part parts[100];
+struct Token_v1 tokens[100];
 void v_Tokenizer(char *code, struct Block *b);
 void l_Tokenizer(char *code, struct Block *b);
 void p_b_Tokenizer(char *code);
+void t_p_b_Tokenier(char *code);
 // extern struct Block block1;
 #endif
