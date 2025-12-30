@@ -46,10 +46,39 @@ int i = 0, v_i = 0, flag = 0;
         i++;
     }       
 }
+
+void p_b_Tokenizer(char *code) {
+    int i = 0, v_i =0, flag=0;char v_part[50];
+    /* <;A=5;;B=5;>(;A+B;) */    
+    struct Part part;
+    while(code[i] != '\0') {
+        if(code[i] == ';' && code[i+1] != ';') {flag = 1;};
+        if(code[i] == ';' && code[i+1] == ';') {flag =0;};
+        if(flag == 1) {
+            if(code[i] != ';') {
+                v_part[v_i] = code[i];
+                v_i++;
+            }
+        } else if(flag == 0) {
+            v_part[v_i]='\0';
+            strcpy(part.value, v_part);
+            parts[part_i] = part;;
+            part_i++;
+            v_part[0] = '\0';
+            part.value[0] = '\0';
+            v_i=0; 
+        }
+        i++; 
+    }
+}
 int main() {
     struct Block* block1;
     struct Block* block2;
-	v_Tokenizer("<;A=5;;B=5;>(;A+B;)", block1);
-	l_Tokenizer("<A=5;B=5>(;A+B;;C+D;)", block2);
-	printf("%s", block1->value);
+    struct Part* p=malloc(sizeof(*p));
+	v_Tokenizer("<;A=5;;B=5;;>(;A+B;)", block1);
+	l_Tokenizer("<;A=5;;B=5;;>(;A+B;;C+D;)", block2);
+	 p_b_Tokenizer(block1->value);
+	 for(int i = 0; i <2;i++) {
+	    printf("%s\n", parts[i].value);
+	 }
 }
