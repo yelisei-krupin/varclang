@@ -97,18 +97,49 @@ void t_p_b_Tokenizer(char *code) {
     token_i++;
 }
 
+void b_logic(char *code1) {
+    int i =0;int v_i = 0, flag = 0;
+    char vpart[100];
+    /* ;AOZGAR+BOZGAR;; */
+    while(code1[i] != '\0') {
+            if(code1[i] == ';' && code1[i+1] != ';') {flag = 1;};
+            if(code1[i] == ';' && code1[i+1] == ';') {flag =0;};
+            if(flag == 1) {
+               if(code1[i] != ';') {
+                 vpart[v_i] = code1[i];
+                 v_i++;
+               }
+            }    
+            else if(flag == 0) {
+                vpart[v_i] = '\0';
+                strcpy(parts_ls[parts_ls_i].value, vpart);
+                v_i = 0;
+                parts_ls_i++;
+                vpart[v_i] = '\0';
+            }
+             i++;
+        }
+}
+
 int main() {
+    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;>(;AOZGAR+BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
     struct Block* block1;
     struct Block* block2;
     struct Part* p=malloc(sizeof(*p));
-	v_Tokenizer("<;AOZGAR=1202;;BOZGAR=152;;DADAM=124;;>(;A+B;)", block1);
-	l_Tokenizer("<;A=5;;B=5;;>(;A+B;;C+D;)", block2);
+	v_Tokenizer(code, block1);
+	l_Tokenizer(code, block2);
 	p_b_Tokenizer(block1->value);
 	t_p_b_Tokenizer(parts[0].value);
 	t_p_b_Tokenizer(parts[1].value);
 	t_p_b_Tokenizer(parts[2].value);
+	t_p_b_Tokenizer(parts[3].value);
+	t_p_b_Tokenizer(parts[4].value);
 
+	b_logic(block2->value);
 	for(int i = 0; i < 3;i++) {
-	    printf("key: %s val: %d\n\n", tokens[i].key, tokens[i].value);
-	}	
+	    printf("=%s=\n", parts_ls[i].value);
+	}
 }
+
+
+// if(code[i] == '-' || code[i] == '+'|| code[i] == '/' || code[i] == '*') {flag = 0;}
