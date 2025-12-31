@@ -220,8 +220,7 @@ int main() {
 	b_p_logic(parts_ls[4].value);
     int val1, val2;
     memset(&tokens_ls[tokens_lsi], 0, sizeof(tokens_ls[tokens_lsi]));
-	// real_logic(tokens_ls[2], val1, val2); 
 	for(int i = 0;i < 10;i++) {
-	    printf("%s", tokens_ls[i].key1);
+	    printf(z"%s", tokens_ls[i].key1);
 	}
 }
