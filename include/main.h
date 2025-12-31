@@ -25,7 +25,7 @@ void v_Tokenizer(char *code, struct Block *b);
 void l_Tokenizer(char *code, struct Block *b);
 void p_b_Tokenizer(char *code);
 void t_p_b_Tokenier(char *code);
-void real_logic(struct Token_v2 t, int val1, int val2);
+int real_logic(struct Token_v2 t);
 // extern struct Block block1;
 void b_logic(char *code1);
 void b_p_logic(char *code);

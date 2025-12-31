@@ -179,12 +179,13 @@ void b_p_logic(char *code) {
     tokens_lsi++;
 }
 
-void real_logic(struct Token_v2 t, int val1, int val2) {
+int real_logic(struct Token_v2 t) {
+    int dat[3];
     int tokens_count = sizeof(tokens) / sizeof(tokens[0]);
     for(int i = 0; i < tokens_count; i++) {
         if(tokens[i].key[0] == '\0') continue; 
         if(strcmp(t.key1, tokens[i].key) == 0) {
-            val1 = tokens[i].value;
+            dat[0]=tokens[i].value;
             break;
         }
     }
@@ -192,14 +193,38 @@ void real_logic(struct Token_v2 t, int val1, int val2) {
         for(int i = 0; i < tokens_count; i++) {
             if(tokens[i].key[0] == '\0') continue; 
             if(strcmp(t.key2, tokens[i].key) == 0) {
-                val2 = tokens[i].value;
+            
+                dat[1]= tokens[i].value;
                 break;
             }
         }
-    printf("Topilgan qiymat: %d %d %d \n", val1, t.method, val2);
+    return dat[0];
+    // printf("Topilgan qiymat: %d %d %d \n", val1, t.method, val2);
 }
+
+int calculate(int val1, int val2, struct Token_v2 t) {
+    switch(t.method) {
+        case 0:
+            printf("%d", val1 + val2);
+            break;
+        case 1:
+            printf("%d", val1 - val2);
+            break;
+        case 2:
+            printf("%d", val1 * val2);
+            break;
+        case 3:
+            printf("%d", val1 / val2);
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+
 int main() {
-    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;KARAM=10;;BABAM=20;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
+    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;LALAM=10;;HHAM=1;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;HOLAM*AMAKIM;;LALAM+HHAM)";
     struct Block* block1;
     struct Block* block2;
     struct Part* p=malloc(sizeof(*p));
@@ -219,7 +244,13 @@ int main() {
 	b_p_logic(parts_ls[4].value);
     int val1, val2;
     memset(&tokens_ls[tokens_lsi], 0, sizeof(tokens_ls[tokens_lsi]));
-	for(int i = 0;i < 10;i++) {
-	    printf(z"%s", tokens_ls[i].key1);
-	}
+    memset(&tokens[token_i], 0, sizeof(tokens[token_i]));
+
+    for(int i = 0;i < 10;i++) {
+        if(tokens_ls[i].key1[0] != '\0') {
+            int va1, val2;
+            real_logic(tokens_ls[i], val1, val2);
+            printf("%d %d", val1, val2);
+        }
+    }
 }
