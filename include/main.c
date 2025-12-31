@@ -179,8 +179,28 @@ void b_p_logic(char *code) {
     tokens_lsi++;
 }
 
+void real_logic(struct Token_v2 t, int val1, int val2) {
+    int tokens_count = sizeof(tokens) / sizeof(tokens[0]);
+    for(int i = 0; i < tokens_count; i++) {
+        if(tokens[i].key[0] == '\0') continue; 
+        if(strcmp(t.key1, tokens[i].key) == 0) {
+            val1 = tokens[i].value;
+            break;
+        }
+    }
+
+        for(int i = 0; i < tokens_count; i++) {
+            if(tokens[i].key[0] == '\0') continue; 
+            if(strcmp(t.key2, tokens[i].key) == 0) {
+                val2 = tokens[i].value;
+                break;
+            }
+        }
+    printf("Topilgan qiymat: %d %d %d \n", val1, t.method, val2);
+}
+
 int main() {
-    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
+    char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;KARAM=10;;BABAM=20;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
     struct Block* block1;
     struct Block* block2;
     struct Part* p=malloc(sizeof(*p));
@@ -195,7 +215,13 @@ int main() {
 	b_logic(block2->value);
 	b_p_logic(parts_ls[0].value);
 	b_p_logic(parts_ls[1].value);
-	// printf("%s", );
-	// printf("%s", parts_ls[0].value);
-	printf("%s %d %s", tokens_ls[1].key1, tokens_ls[1].method, tokens_ls[1].key2);
+	b_p_logic(parts_ls[2].value);
+	b_p_logic(parts_ls[3].value);
+	b_p_logic(parts_ls[4].value);
+    int val1, val2;
+    memset(&tokens_ls[tokens_lsi], 0, sizeof(tokens_ls[tokens_lsi]));
+	// real_logic(tokens_ls[2], val1, val2); 
+	for(int i = 0;i < 10;i++) {
+	    printf("%s", tokens_ls[i].key1);
+	}
 }
