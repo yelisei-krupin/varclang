@@ -198,7 +198,6 @@ void real_logic(struct Token_v2 t, int val1, int val2) {
         }
     printf("Topilgan qiymat: %d %d %d \n", val1, t.method, val2);
 }
-
 int main() {
     char *code="<;AOZGAR=1202;;BOZGAR=152;;HOLAM=123;;AMAKIM=33;;KARAM=10;;BABAM=20;;>(;AOZGAR*BOZGAR;;HOLAM-AMAKIM;;KARAM/BABAM;;)";
     struct Block* block1;
